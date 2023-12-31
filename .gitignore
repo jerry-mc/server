@@ -1,2 +1,14 @@
 logs
 world
+config
+defaultconfigs
+mohist-config
+banned-ips.json
+banned-players.json
+bukkit.yml
+commands.yml
+ops.json
+permissions.yml
+spigot.yml
+usercache.json
+whitelist.json
