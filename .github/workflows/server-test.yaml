@@ -1,0 +1,67 @@
+# 定义workflow的名称
+name: Minecraft Server Test
+
+# 定义workflow的触发条件，这里是每次push到main分支时
+on: push
+
+# 定义workflow的环境变量，这里定义了一个名为TIMEOUT的变量，值为120
+env:
+  TIMEOUT: 120
+
+# 定义workflow的任务，这里只有一个任务
+jobs:
+  # 定义任务的id，必须唯一
+  test-server:
+    # 定义任务的名称，可选
+    name: Test Minecraft Server
+    # 定义任务的运行环境，这里使用ubuntu
+    runs-on: ubuntu-latest
+    # 定义任务的运行步骤，必选，可以有一个或多个步骤
+    steps:
+      # 第一步，安装Java
+      - name: Set up Java
+        # 这里使用uses: actions/setup-java@v2，表示使用一个官方提供的action，用于设置Java运行环境
+        uses: actions/setup-java@v4
+        # 这里使用with，表示给这个action传递一些参数
+        with:
+          # 这里指定要使用的Java发行版，这里使用adopt
+          distribution: 'adopt'
+          # 这里指定要使用的Java版本，这里使用11
+          java-version: '11'
+      # 第二步，从代码仓库中获取Minecraft服务端
+      - name: Get Minecraft Server
+        # 这里使用uses: actions/checkout@v2，表示使用一个官方提供的action，用于从代码仓库中获取文件
+        uses: actions/checkout@v4
+      # 第三步，启动Minecraft服务端，并设置超时时间为120秒
+      - name: Start Minecraft Server
+        # 这里使用run: timeout $TIMEOUT java -Xmx2048M -Xms2048M -jar mohist-1.16.5-131-server.jar nogui，表示使用2GB的内存启动服务端，并使用环境变量TIMEOUT作为超时时间
+        run: timeout $TIMEOUT java -Xmx2048M -Xms2048M -jar mohist-1.16.5-131-server.jar nogui
+        # 如果服务端正常启动，会输出Done (xx.xxxs)! For help, type "help"
+        # 如果服务端异常退出，会返回非零的退出码
+        # 这里使用continue-on-error: true，让workflow继续执行，而不是直接失败
+        continue-on-error: true
+      # 第四步，检查服务端是否正常启动
+      - name: Check Server Status
+        run: |
+          # 如果日志文件中包含Done (xx.xxxs)! For help, type "help"，则表示测试通过
+          if grep -q "Done" logs/latest.log; then
+            echo "Test passed!"
+          else
+            echo "Test failed!"
+            # 如果测试失败，就把crash相关的文件夹上传到workflow的artifacts中，方便下载查看
+            echo "::set-output name=crash::true"
+          fi
+        # 这里使用id: check，方便后面引用这个步骤的输出
+        id: check
+      # 第五步，上传crash相关的文件夹，如果有的话
+      - name: Upload Crash Reports
+        # 这里使用if: steps.check.outputs.crash == 'true'，表示只有当第四步的输出中有crash时，才执行这一步
+        if: steps.check.outputs.crash == 'true'
+        # 这里使用uses: actions/upload-artifact@v2，表示使用一个官方提供的action，用于上传文件到artifacts中
+        uses: actions/upload-artifact@v2
+        # 这里使用with，表示给这个action传递一些参数
+        with:
+          # 这里指定要上传的文件夹的路径，可以根据实际情况修改
+          path: crash-reports
+          # 这里指定上传后的文件夹的名称，可以自定义
+          name: crash-reports
