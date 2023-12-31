@@ -12,3 +12,7 @@ permissions.yml
 spigot.yml
 usercache.json
 whitelist.json
+# 忽略plugins文件夹
+plugins/
+# 保留跟踪plugins子目录中的.jar文件
+!plugins/**/*.jar
