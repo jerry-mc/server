@@ -7,5 +7,7 @@ services:
       - "25565:25565"
     volumes:
       - ./:/app
+    environment:
+      - MEMORY=3072
     command:
-      - "java -Xmx3072M -Xms3072M -jar mohist-1.16.5-131-server.jar nogui"
+      - "bash start.sh"
