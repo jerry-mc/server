@@ -58,10 +58,22 @@ jobs:
         # 这里使用if: steps.check.outputs.crash == 'true'，表示只有当第四步的输出中有crash时，才执行这一步
         if: steps.check.outputs.crash == 'true'
         # 这里使用uses: actions/upload-artifact@v2，表示使用一个官方提供的action，用于上传文件到artifacts中
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         # 这里使用with，表示给这个action传递一些参数
         with:
           # 这里指定要上传的文件夹的路径，可以根据实际情况修改
           path: crash-reports
           # 这里指定上传后的文件夹的名称，可以自定义
           name: crash-reports
+      # 第六步，上传logs文件夹
+      - name: Upload Logs
+        # 这里使用if: steps.check.outputs.crash == 'true'，表示只有当第四步的输出中有crash时，才执行这一步
+        if: steps.check.outputs.crash == 'true'
+        # 这里使用uses: actions/upload-artifact@v2，表示使用一个官方提供的action，用于上传文件到artifacts中
+        uses: actions/upload-artifact@v4
+        # 这里使用with，表示给这个action传递一些参数
+        with:
+          # 这里指定要上传的文件夹的路径，可以根据实际情况修改
+          path: logs
+          # 这里指定上传后的文件夹的名称，可以自定义
+          name: logs

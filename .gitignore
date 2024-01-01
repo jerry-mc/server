@@ -16,3 +16,4 @@ whitelist.json
 plugins/
 # 保留跟踪plugins子目录中的.jar文件
 !plugins/**/*.jar
+server.properties
