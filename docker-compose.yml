@@ -7,3 +7,5 @@ services:
       - "25565:25565"
     volumes:
       - ./:/app
+    command:
+      - "java -Xmx3072M -Xms3072M -jar mohist-1.16.5-131-server.jar nogui"

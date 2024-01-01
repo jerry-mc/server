@@ -26,8 +26,8 @@ jobs:
         with:
           # 这里指定要使用的Java发行版，这里使用adopt
           distribution: 'adopt'
-          # 这里指定要使用的Java版本，这里使用11
-          java-version: '11'
+          # 这里指定要使用的Java版本，这里使用17
+          java-version: '17'
       # 第二步，从代码仓库中获取Minecraft服务端
       - name: Get Minecraft Server
         # 这里使用uses: actions/checkout@v2，表示使用一个官方提供的action，用于从代码仓库中获取文件
