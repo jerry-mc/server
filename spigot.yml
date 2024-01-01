@@ -1,12 +1,12 @@
-# This is the main configuration file for Spigot.
-# As you can see, there's tons to configure. Some options may impact gameplay, so use
-# with caution, and make sure you know what each option does before configuring.
-# For a reference for any variable inside this file, check out the Spigot wiki at
+# 这是Spigot的主配置文件
+# 有很多项目可配置，其中某些项目会影响游戏体验，更改时应多加注意。
+# 请确保在更改每个配置项之前都知道这个配置项控制什么。
+# 此配置文件中每个配置项的用途参考Spigot wiki于
 # http://www.spigotmc.org/wiki/spigot-configuration/
-# If you need help with the configuration or have any questions related to Spigot,
+# 如果需要关于配置文件的帮助或有任何关于Spigot的问题，
 # 
 # 
-# join us at the IRC or drop by our forums and leave a post.
+# 请加入Spigot的IRC或在Spigot论坛发帖
 # IRC: #spigot @ irc.spi.gt ( http://www.spigotmc.org/pages/irc/ )
 # Forums: http://www.spigotmc.org/
 
