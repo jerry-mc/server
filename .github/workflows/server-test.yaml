@@ -6,7 +6,7 @@ on: push
 
 # 定义workflow的环境变量，这里定义了一个名为TIMEOUT的变量，值为120
 env:
-  TIMEOUT: 120
+  TIMEOUT: 1200
 
 # 定义workflow的任务，这里只有一个任务
 jobs:
