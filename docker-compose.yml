@@ -7,3 +7,7 @@ services:
       - "25565:25565"
     volumes:
       - ./:/app
+    environment:
+      - MEMORY=3072
+    command:
+      - "bash start.sh"
