@@ -4,6 +4,7 @@ services:
   minecraft:
     image: openjdk:17-ea-slim
     working_dir: /app
+
     ports:
       - "25565:25565"
     volumes:
@@ -11,3 +12,4 @@ services:
     environment:
       - MEMORY=3072
     command: [ "bash", "start.sh" ]
+
