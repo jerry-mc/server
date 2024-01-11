@@ -3,12 +3,11 @@ version: '3'
 services:
   minecraft:
     image: openjdk:17-ea-slim
-    workdir: /app
+    working_dir: /app
     ports:
       - "25565:25565"
     volumes:
       - ./:/app
     environment:
       - MEMORY=3072
-    command:
-      - "bash start.sh"
+    command: [ "bash", "start.sh" ]

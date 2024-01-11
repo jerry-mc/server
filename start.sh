@@ -1,3 +1,3 @@
 cp server server.properties
-menory =${MEMORY}
-java -jar -Xms${MEMORY} -Xmx${MEMORY} mohist-*.jar nogui
+memory=${MEMORY}
+java -jar -Xms${memory}M -Xmx${memory}M mohist-*.jar nogui
